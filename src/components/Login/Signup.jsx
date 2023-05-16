@@ -59,7 +59,7 @@ const Signup = () => {
       if (error.response && error.response.status >= 400) {
         const errorMessage = error.response.data;
         console.log(error.response.data);
-        toast.error(error.response.data.error, {
+        toast.error(error.response.data?.error || "Error signing up", {
           position: toast.POSITION.TOP_CENTER,
         });
 
@@ -89,12 +89,12 @@ const Signup = () => {
     !values.address.district;
 
   return (
-    <div className="grid grid-cols-1 items-center justify-items-center h-screen">
-      <Card className="w-96">
+    <div className="grid grid-cols-1 items-center justify-items-center h-screen m-2">
+      <Card className="w-2/5 m-2">
         <CardHeader
           variant="gradient"
           color="blue"
-          className="mb-4 grid h-28 place-items-center"
+          className=" m-1 mb-4 grid h-28 place-items-center"
         >
           <Typography variant="h3" color="white">
             Sign Up

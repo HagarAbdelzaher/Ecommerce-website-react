@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { login } from "../../features/slices/authSlice";
 import { useDispatch } from "react-redux";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const intitalState = {
     username: "",
@@ -37,17 +38,30 @@ const Login = () => {
       dispatch(login({ ...values, authUser: true, token }));
     } catch (error) {
       console.error(error);
+      if (error.response && error.response.status >= 400) {
+        console.log(error.response.data);
+        toast.error(error.response.data?.error || "Wrong Credintials", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
     }
   };
   const isDisabled = !values.username || !values.password;
 
   return (
-    <div className="grid grid-cols-1 items-center justify-items-center h-screen">
-      <Card className="w-96">
+    <div className="grid grid-cols-1 items-center justify-items-center h-screen m-2">
+      <Card className="w-2/5 m-2">
         <CardHeader
           variant="gradient"
           color="blue"
-          className="mb-4 grid h-28 place-items-center"
+          className=" m-1 mb-4 grid h-28 place-items-center"
         >
           <Typography variant="h3" color="white">
             Sign In
@@ -72,7 +86,9 @@ const Login = () => {
           />
           <div className="-ml-2.5"></div>
           <div className="text-center">
-            <Link to="/signup">Don't have an account? Sign up here.</Link>
+            <Link className="text-blue-500" to="/signup">
+              Don't have an account? Sign up here.
+            </Link>
           </div>
         </CardBody>
         <CardFooter className="pt-0">
@@ -86,6 +102,7 @@ const Login = () => {
           </Button>
         </CardFooter>
       </Card>
+      <ToastContainer />
     </div>
   );
 };
