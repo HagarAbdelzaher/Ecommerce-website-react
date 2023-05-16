@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { login } from "../../features/slices/authSlice";
 import { useDispatch } from "react-redux";
@@ -70,6 +71,9 @@ const Login = () => {
             onChange={onChange}
           />
           <div className="-ml-2.5"></div>
+          <div className="text-center">
+            <Link to="/signup">Don't have an account? Sign up here.</Link>
+          </div>
         </CardBody>
         <CardFooter className="pt-0">
           <Button
