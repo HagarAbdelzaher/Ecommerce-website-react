@@ -8,14 +8,14 @@ import {
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { login } from "../../features/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const intitalState = {
     username: "",
     password: "",
@@ -41,7 +41,7 @@ const Login = () => {
         authUser: true,
       };
       dispatch(login(loggedInUser));
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {
