@@ -1,25 +1,38 @@
 import React from "react";
 import "./App.css";
 import Login from "./components/Login/Login.jsx";
+import SingleCategory from "./components/Filteredproducts/SingleCategory";
+import SingleProduct from "./components/Filteredproducts/SingleProduct";
 import Signup from "./components/Login/Signup";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./components/Main/Main";
 function App() {
   const user = useSelector((state) => state.user.user);
   const { authUser } = user;
   return (
     <div className="App">
-      <BrowserRouter>
+      {<BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login></Login>}></Route>
-          <Route path="/signup" element={<Signup></Signup>}></Route>
-          {/* This should be the line when the main component get implemented */}
-          {/* <Route
+   
+        <Route path="/signup" element={<Signup></Signup>}></Route>
+        <Route
             path="/"
             element={authUser ? <Main></Main> : <Login></Login>}
-          ></Route> */}
+          ></Route>
+
+          <Route
+            path="/categories/:id"
+            element={<SingleCategory></SingleCategory>}
+          ></Route>
+          <Route
+            path="/products/:id"
+            element={<SingleProduct></SingleProduct>}
+          ></Route>
         </Routes>
       </BrowserRouter>
+       
+        };
     </div>
   );
 }
