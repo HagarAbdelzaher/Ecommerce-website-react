@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
 import {
   Card,
   CardHeader,
@@ -9,10 +8,6 @@ import {
 } from "@material-tailwind/react";
 
 const Profile = () => {
-  const token = useSelector((state) => state.user.user.token);
-  const decodedToken = jwt_decode(token);
-  const { username, name, email, phone } = decodedToken;
-
   return (
     <div className="grid grid-cols-1 items-center justify-items-center h-screen m-2">
       <Card className="w-2/5 m-2">

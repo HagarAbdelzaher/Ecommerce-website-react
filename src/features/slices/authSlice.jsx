@@ -19,13 +19,7 @@ export const authSlice = createSlice({
         state.user.authUser = false;
       } else {
         state.user.authUser = true;
-        // const token = userId.token;
-        let data = {
-          username: userId.username,
-          token: userId.token,
-          authUser: userId.authUser,
-        };
-        const saveState = JSON.stringify(data);
+        const saveState = JSON.stringify(userId);
         sessionStorage.setItem("authUser", saveState);
       }
     },

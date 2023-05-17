@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
+  // const navigate = useNavigate();
   const intitalState = {
     username: "",
     password: "",
@@ -34,8 +35,13 @@ const Login = () => {
         "http://127.0.0.1:8000/account/login/",
         values
       );
-      const token = response.data.token;
-      dispatch(login({ ...values, authUser: true, token }));
+      const loggedInUser = {
+        user: response.data.user,
+        token: response.data.token,
+        authUser: true,
+      };
+      dispatch(login(loggedInUser));
+      // navigate("/home");
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {
