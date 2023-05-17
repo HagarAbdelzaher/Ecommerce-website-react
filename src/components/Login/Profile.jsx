@@ -9,14 +9,7 @@ import {
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  //   const user = useSelector((state) => state.auth.user);
-  const user = {
-    username: "user123",
-    first_name: "firstname",
-    last_name: "lastname",
-    email: "user@gmail.com",
-    address: { street: "1122", district: "Maadi", country: "EG" },
-  };
+  const user = useSelector((state) => state.user.user).user;
   const avatarSrc =
     "https://a0.anyrgb.com/pngimg/546/1112/loli-profile-icon-share-icon-interface-avatar-icon-design-user-female-svg-face-thumbnail.png";
 
