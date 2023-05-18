@@ -14,8 +14,7 @@ function Categories() {
       .get("http://127.0.0.1:8000/categories/")
       .then((response) => {
         const data = response.data;
-
-        setButtons(data);
+        setButtons(data.results);
       })
       .catch((error) => {
         console.error(error);

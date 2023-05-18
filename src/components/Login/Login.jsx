@@ -40,7 +40,11 @@ const Login = () => {
         authUser: true,
       };
       dispatch(login(loggedInUser));
+<<<<<<< HEAD
   
+=======
+      navigate("/");
+>>>>>>> 60f7321 (Cart && WishList done)
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {

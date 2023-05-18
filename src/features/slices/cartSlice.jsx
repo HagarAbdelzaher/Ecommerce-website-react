@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import interceptorInstance from "../../axios";
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -9,38 +10,35 @@ export const cartSlice = createSlice({
     totalPrice: 0,
   },
   reducers: {
-    addToCart(state, action) {
-      const productId = action.payload;
-      try {
-        const exist = state.cart.find(
-          (product) =>
-            product.id === productId.id 
-        );
-        if (exist) {
-          exist.amount++;
-          exist.totalPrice += productId.price;
-          state.totalAmount++;
-          state.totalPrice += productId.price;
-        } else {
-          state.cart.push({
-            id: productId.id,
-            price: productId.price,
-            
-            amount: 1,
-            iimage :productId.image,
-            totalPrice: productId.price,
-            name: productId.name,
-            description: productId.description,
-        
-          });
-          state.totalAmount++;
-          state.totalPrice += productId.price;
-        }
-      } catch (err) {
-        return err;
-      }
-    }
-   }} );
+    setCart(state, action) {
+      state.cart = action.payload;
+      state.totalAmount = state.cart.length;
+      state.totalPrice = state.cart.reduce(
+        (total, item) => total + (item.quantity * item.product.price),
+        0
+      );
+    },
 
-export const { addToCart} = cartSlice.actions;
+    editquantity(state, action) {
+      const { selected_item, newQuantity } = action.payload;
+      const quantity_difference =  newQuantity - selected_item.quantity
+      state.totalPrice  = state.totalPrice  +  (selected_item.product.price * quantity_difference);
+      state.cart.map((item) => {
+        if (selected_item.id === item.id) item.quantity = newQuantity;
+        return item;
+      });
+    },
+    removeFromCart(state, action) {
+      const selected_item = action.payload;
+          state.cart = state.cart.filter(
+            (item) => item.id !== selected_item.id
+          );
+          state.totalAmount -=1;
+          state.totalPrice  -= (selected_item.product.price * selected_item.quantity)
+    },
+  },
+});
+
+export const { removeFromCart, setCart, editquantity } =
+  cartSlice.actions;
 export default cartSlice.reducer;

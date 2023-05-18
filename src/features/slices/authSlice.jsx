@@ -6,7 +6,7 @@ export const authSlice = createSlice({
     user: JSON.parse(sessionStorage.getItem("authUser")) || {
       username: "",
       password: "",
-
+      token: "",
       authUser: false,
     },
   },
@@ -20,8 +20,10 @@ export const authSlice = createSlice({
       if (!userValidation || !passwordValidation) {
         state.user.authUser = false;
       } else {
+        console.log(userlogging.token);
         state.user = userlogging.user;
         state.user.authUser = true;
+        state.user.token = userlogging.token
         const saveState = JSON.stringify(userlogging);
         sessionStorage.setItem("authUser", saveState);
       }

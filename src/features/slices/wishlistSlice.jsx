@@ -5,35 +5,22 @@ export const wishlistSlice = createSlice({
   initialState: {
     wishlist: [],
     totalAmount: 0,
-  
   },
   reducers: {
-    addToWishlist(state, action) {
-      const productId = action.payload;
-      try {
-        const exist = state.wishlist.find(
-          (product) =>
-            product.id === productId.id 
-        );
-        if (exist) {
-     return;
-        } else {
-          state.wishlist.push({
-            id: productId.id,
-            price: productId.price,
-            image :productId.image,
-            name: productId.name,
-            description: productId.description,
-        
-          });
-          state.totalAmount++;
-    
-        }
-      } catch (err) {
-        return err;
-      }
-    }
-   }} );
+    setWishlist(state, action) {
+      state.wishlist = action.payload;
+      state.totalAmount = state.wishlist.length;
+      console.log(state.wishlist.length);
+    },
 
-export const { addToWishlist} = wishlistSlice.actions;
+    addToWishlist(state, action) {
+      const item = action.payload;
+      state.wishlist.push(item);
+      state.totalAmount++;
+    },
+  },
+});
+
+export const { addToWishlist, setWishlist, getWishlist } =
+  wishlistSlice.actions;
 export default wishlistSlice.reducer;
