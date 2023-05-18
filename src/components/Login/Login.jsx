@@ -26,6 +26,7 @@ const Login = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,11 +41,7 @@ const Login = () => {
         authUser: true,
       };
       dispatch(login(loggedInUser));
-<<<<<<< HEAD
-  
-=======
       navigate("/");
->>>>>>> 60f7321 (Cart && WishList done)
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {
