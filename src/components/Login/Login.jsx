@@ -40,7 +40,7 @@ const Login = () => {
         authUser: true,
       };
       dispatch(login(loggedInUser));
-     
+  
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/images/logo.png";
-// import Cart from "../Cart/Cart";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/slices/authSlice";
 
@@ -84,9 +84,15 @@ const Navbar = () => {
             <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
              Cart
             </p>
-            {/* <div>
-              {open && <Cart openModal={open} setOpen={setOpen}></Cart>}
-            </div> */}
+         
+          </div>
+          <div className="flex flex-row items-center cursor-pointer">
+                 <Link to={"/profile" }>
+               <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
+             Update
+            </p>
+            </Link>
+            
           </div>
           <div className="flex flex-row items-center cursor-pointer pl-4">
            
