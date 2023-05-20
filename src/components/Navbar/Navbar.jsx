@@ -92,7 +92,7 @@ const Navbar = () => {
 
             <Link
               to="/cart"
-              className=" font-inter text-base font-medium tracking-normal leading-none text-center "
+              className=" p-2 font-inter text-base font-medium tracking-normal leading-none text-center "
             >
               Cart
             </Link>
@@ -117,12 +117,14 @@ const Navbar = () => {
                 </p>
               </Tooltip>
             </div>
-          </div>
+            </div>
           ) : (
-  <></>
-)}
-        </div>
-      </div>
+            <></>
+          )}
+         
+        
+     
+      
       <div className="bg-black p-4 w-full flex items-center justify-center mx-auto">
         <p className="text-white font-inter text-base font-medium ">50& OFF</p>
         <p className="text-white font-inter text-base font-medium mx-96">
