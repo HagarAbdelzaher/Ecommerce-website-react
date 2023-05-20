@@ -25,14 +25,14 @@ const ProductSection = () => {
         {products.map((product, index) => {
           return (
             <div key={index}>
-               <ProductCard
-                    id={product.id}
-                    name={product.name}
-                    description={product.description}
-                    image={product.image}
-                    price={product.price}
-                    quantity={product.quantity}
-                  ></ProductCard>
+              <ProductCard
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                quantity={product.quantity}
+              ></ProductCard>
             </div>
           );
         })}

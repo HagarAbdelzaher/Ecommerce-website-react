@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,7 +66,7 @@ const Login = () => {
       <Card className="w-2/5 m-2">
         <CardHeader
           variant="gradient"
-          color="blue"
+          color="red"
           className=" m-1 mb-4 grid h-28 place-items-center"
         >
           <Typography variant="h3" color="white">
@@ -92,7 +92,7 @@ const Login = () => {
           />
           <div className="-ml-2.5"></div>
           <div className="text-center">
-            <Link className="text-blue-500" to="/signup">
+            <Link className="text-blue-900" to="/signup">
               Don't have an account? Sign up here.
             </Link>
           </div>
@@ -100,6 +100,7 @@ const Login = () => {
         <CardFooter className="pt-0">
           <Button
             variant="gradient"
+            color="red"
             fullWidth
             disabled={isDisabled}
             onClick={handleSubmit}
