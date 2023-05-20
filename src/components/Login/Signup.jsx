@@ -376,6 +376,7 @@ const Signup = () => {
         <CardFooter className="pt-0">
           <Button
             variant="gradient"
+            color="red"
             fullWidth
             disabled={isDisabled}
             onClick={handleSubmit}
