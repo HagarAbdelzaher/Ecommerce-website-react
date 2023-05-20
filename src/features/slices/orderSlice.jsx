@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import interceptorInstance from "../../axios";
 
 export const orderSlice = createSlice({
   name: "order",
@@ -12,9 +11,6 @@ export const orderSlice = createSlice({
   },
   reducers: {
     setOrder(state, action) {
-      console.log('action.payload.orders');
-      console.log(action.payload);
-      console.log('action.payload.orders');
       state.order = action.payload;
       state.shipping_address = action.payload.shipping_address;
       state.order_items = action.payload.order_items;
@@ -22,9 +18,16 @@ export const orderSlice = createSlice({
       state.payment_status = action.payload.payment_status;
     },
 
+    cancelOrderState(state, action) {
+      const id = action.payload;
+      state.order.forEach((order_item) => {
+        if (order_item.id === id) {
+          order_item.status = "Canceled";
+        }
+      });
+    },
   },
 });
 
-export const { setOrder } =
-  orderSlice.actions;
+export const { setOrder, cancelOrderState } = orderSlice.actions;
 export default orderSlice.reducer;
