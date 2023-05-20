@@ -87,35 +87,35 @@ const Navbar = () => {
 
             <Link
               to="/cart"
-              className=" font-inter text-base font-medium tracking-normal leading-none text-center "
+              className=" p-2 font-inter text-base font-medium tracking-normal leading-none text-center "
             >
               Cart
             </Link>
           </div>
-            {user ? (
-          <div className="flex flex-row items-center cursor-pointer">
-            <Link to={"/profile"}>
-              <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
-               Profile
-              </p>
-            </Link>
-          </div>
-          ) : (
-  <></>
-)}
           {user ? (
-          <div className="flex flex-row items-center cursor-pointer pl-4">
-            <div onClick={() => dispatch(logout())}>
-              <Tooltip content="Sign Out" placement="bottom">
-                <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
-                 Logout
+            <div className="flex flex-row items-center cursor-pointer">
+              <Link to={"/profile"}>
+                <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
+                  Profile
                 </p>
-              </Tooltip>
+              </Link>
             </div>
-          </div>
           ) : (
-  <></>
-)}
+            <></>
+          )}
+          {user ? (
+            <div className="flex flex-row items-center cursor-pointer pl-4">
+              <div onClick={() => dispatch(logout())}>
+                <Tooltip content="Sign Out" placement="bottom">
+                  <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
+                    Logout
+                  </p>
+                </Tooltip>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className="bg-black p-4 w-full flex items-center justify-center mx-auto">

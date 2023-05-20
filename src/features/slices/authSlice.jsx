@@ -18,7 +18,6 @@ export const updateProfile = createAsyncThunk(
         config
       );
       return response.data;
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +57,16 @@ export const authSlice = createSlice({
       first_name: "",
       last_name: "",
       email: "",
+      address: {
+        detailed_address: "",
+        district: "",
+        city: "",
+        country: "",
+        floor_no: "",
+        apartment_no: "",
+        building_no: "",
+        street: "",
+      },
       authUser: false,
     },
   },
@@ -92,23 +101,23 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(updateProfile.fulfilled, (state, action) => {
-        console.log(state.user.user);
-        state.user.user.first_name = action.payload.first_name;
-        state.user.user.last_name = action.payload.last_name;
-        state.user.user.email = action.payload.email;
+        console.log(state.user);
+        state.user.first_name = action.payload.first_name;
+        state.user.last_name = action.payload.last_name;
+        state.user.email = action.payload.email;
         let data = {
-          user: state.user.user,
+          user: state.user,
           authUser: true,
-          token: state.user.user.token,
+          token: state.user.token,
         };
         sessionStorage.setItem("authUser", JSON.stringify(data));
       })
       .addCase(updateAddress.fulfilled, (state, action) => {
-        state.user.user.address = action.payload;
+        state.user.address = action.payload;
         let data = {
-          user: state.user.user,
+          user: state.user,
           authUser: true,
-          token: state.user.user.token,
+          token: state.user.token,
         };
         sessionStorage.setItem("authUser", JSON.stringify(data));
       });
