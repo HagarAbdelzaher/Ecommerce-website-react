@@ -65,10 +65,8 @@ const Signup = () => {
 
         console.log(errorMessage);
       } else if (error.request) {
-        // The request was made but no response was received
         console.log(error.request);
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.log("Error", error.message);
       }
       console.log(error.config);
@@ -93,7 +91,7 @@ const Signup = () => {
       <Card className="w-2/5 m-2">
         <CardHeader
           variant="gradient"
-          color="blue"
+          color="red"
           className=" m-1 mb-4 grid h-28 place-items-center"
         >
           <Typography variant="h3" color="white">
