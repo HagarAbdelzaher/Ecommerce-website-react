@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Tooltip, Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { fetchSingleProduct } from "../../features/slices/productsSlice";
@@ -12,6 +12,8 @@ const SingleProduct = () => {
   const product = useSelector((state) => state.products.singleProduct);
   const cart = useSelector((state) => state.cart.cart);
   const wishlist = useSelector((state) => state.wishlist.wishlist);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -24,7 +26,14 @@ const SingleProduct = () => {
   }
 
   const addToCart = (productId) => {
-    const existed = cart.findIndex((cartItem) => cartItem.product.id === productId);
+    if (!user.username) {
+      console.log("HERE");
+      navigate("/login");
+      return;
+    }
+    const existed = cart.findIndex(
+      (cartItem) => cartItem.product.id === productId
+    );
     if (existed === -1) {
       interceptorInstance
         .post(`users/cart/items/${productId}/add`, {
@@ -46,6 +55,10 @@ const SingleProduct = () => {
   };
 
   const addToWishlist = (productId) => {
+    if (!user.username) {
+      navigate("/login");
+      return;
+    }
     const existed = wishlist.findIndex((item) => item.product.id === productId);
     if (existed === -1) {
       interceptorInstance
