@@ -303,7 +303,7 @@ function Cart() {
                 <span>Total cost</span>
                 <span>{totalPrice + 10}$</span>
               </div>
-              <Link to={"/order"}>
+              <Link to={"/checkout"}>
               <Button className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full">
                 Checkout
               </Button>
@@ -314,7 +314,7 @@ function Cart() {
         <div>
           <Link
             to="/"
-            className="flex font-semibold text-gray-600 text-lg mt-10"
+            className="flex font-semibold text-gray-600 text-lg my-10"
           >
             <i className="fa-solid fa-arrow-left text-gray-600 text-l pr-1 text-lg"></i>
             Continue Shopping
