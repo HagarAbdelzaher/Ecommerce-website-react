@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
 import { Button, Input, Select, Option } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   setCart,
   removeFromCart,
@@ -17,6 +20,7 @@ function Cart() {
   const cart = useSelector((state) => state.cart.cart);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const [disableAdding, setDisableAdding] = useState(false);
 
   useEffect(() => {
     interceptorInstance
@@ -35,7 +39,24 @@ function Cart() {
           quantity,
         })
         .then((response) => dispatch(setCart([...cart, response.data])))
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.error(error);
+          if (error.response && error.response.status >= 400) {
+            if (error.response.data[0] === "product out of stock") {
+              setDisableAdding(true);
+            }
+            toast.error(error.response.data[0] || "Wrong Credintials", {
+              position: 'top-center',
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
     } else {
       interceptorInstance
         .patch(`users/cart/items/${cart[existed].product.id}/${action}`, {
@@ -49,7 +70,21 @@ function Cart() {
             })
           );
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.error(error);
+          if (error.response && error.response.status >= 400) {
+            toast.error(error.response.data.error[0] || "Wrong Credintials", {
+              position: "top-center",
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
     }
   };
 
@@ -58,12 +93,28 @@ function Cart() {
     interceptorInstance
       .delete(`users/cart/items/${selected_item.product.id}/remove`)
       .then((response) => dispatch(removeFromCart(selected_item)))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error(error);
+        if (error.response && error.response.status >= 400) {
+          console.log(error.response.data);
+          toast.error(error.response.data.error[0] || "Wrong Credintials", {
+            position: 'top-center',
+          });
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
   };
 
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="container mx-10 mt-20">
         <div className="flex mt-20">
           <div className="shadow-md px-2 w-full">
@@ -112,14 +163,16 @@ function Cart() {
                             </div>
                           </td>
                           <td className="col-span-3">
-                            <div className="flex justify-between ml-4 ">
+                            <div className="flex justify-between ml-4 "> 
                               <i
                                 className={
-                                  "fa-solid fa-plus text-light-green-500 text-lg pt-1 px-2 cursor-pointer"
+                                  disableAdding || item.quantity >= 15
+                                    ? "fa-solid fa-plus text-gray-500 text-lg pt-1 px-2"
+                                    : "fa-solid fa-plus text-light-green-500 text-lg pt-1 px-2 cursor-pointer"
                                 }
-                                onClick={() => updateQuantity(1, item, "add")}
+                                onClick={() =>{ if(item.quantity >= 15) return ; updateQuantity(1, item, "add")}}
                               ></i>
-                              <select
+                              <Select
                                 className="bg-gray-50 border border-gray-300 text-gray-900 
                             text-md rounded-lg focus:ring-blue-500 focus:border-blue-500
                              block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
@@ -131,14 +184,15 @@ function Cart() {
                                 }
                               >
                                 {quantities.map((quantity) => (
-                                  <option
+                                  <Option
                                     value={quantity}
                                     key={`${item.id}+${item.product.id}+${quantity}`}
+                                    selected={ quantity === item.quantity }
                                   >
                                     {quantity}
-                                  </option>
+                                  </Option>
                                 ))}
-                              </select>
+                              </Select>
                               <i
                                 className="fa-solid fa-minus text-red-900 text-lg pt-1 px-2 cursor-pointer"
                                 onClick={() =>
@@ -146,6 +200,7 @@ function Cart() {
                                 }
                               ></i>
                             </div>
+                          <p className={disableAdding || item.quantity >= 15 ? 'block text-s text-deep-orange-900' : 'hidden'}> No more than 15 Items </p> 
                           </td>
                           <td className="col-span-2">
                             <span className="text-center w-1/5 font-semibold text-lg">
@@ -180,7 +235,9 @@ function Cart() {
                           <div className="flex flex-row">
                             <i
                               className={
-                                "fa-solid fa-plus text-light-green-500 text-lg pt-1 px-1 cursor-pointer"
+                                item.product.quantity
+                                  ? "fa-solid fa-plus text-light-green-500 text-lg pt-1 px-2 cursor-pointer"
+                                  : "fa-solid fa-plus text-gray-500 text-lg pt-1 px-2"
                               }
                               onClick={() => updateQuantity(1, item, "add")}
                             ></i>

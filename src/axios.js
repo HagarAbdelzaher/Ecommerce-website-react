@@ -1,21 +1,4 @@
 import axios from "axios";
-// import { useSelector } from "react-redux";
-
-// // function CustomAxios(){
-// //     const user = useSelector((state) => state.user.user);
-
-// //    return  axios.create(
-// //     {
-// //         baseURL:'http://127.0.0.1:8000/',
-// //         withCredentials:true,
-// //         headers:{
-// //             'Content-Type': 'application/json',
-// //             Authorization: `token ${user.token}`,
-// //         }
-// //     }
-// // )
-// // }
-
 const interceptorInstance = axios.create();
 
 interceptorInstance.interceptors.request.use(
@@ -34,18 +17,6 @@ interceptorInstance.interceptors.request.use(
   }
 );
 
-interceptorInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    console.log(error);
-    if (error.response?.status === 401) {
-      window.location.href = '/';
-    }
-    return Promise.reject(error);
-  }
-);
 
 export default interceptorInstance;
 
