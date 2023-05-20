@@ -11,13 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../../features/slices/productsSlice";
 import { Link, useNavigate } from "react-router-dom";
 
-
-import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
 import { Button } from "@material-tailwind/react";
 import { setCart, editquantity } from "../../features/slices/cartSlice";
 import { setWishlist } from "../../features/slices/wishlistSlice";
-
 
 const ProductCard = ({ id, name, description, image, price, quantity }) => {
   const dispatch = useDispatch();
@@ -30,7 +27,7 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
     if (!user.username) {
       navigate("/login");
       return;
-      }
+    }
     const existed = cart.findIndex((cartItem) => cartItem.product.id === id);
     if (existed === -1) {
       interceptorInstance
@@ -57,7 +54,7 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
     if (!user.username) {
       navigate("/login");
       return;
-      }
+    }
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       interceptorInstance
@@ -70,18 +67,19 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
   };
 
   return (
-    <Link to={`/products/` + id}>
-      <div>
-        <Card className="w-96 relative">
-          <Typography
-            variant="h4"
-            className="mb-2 absolute -rotate-45 top-12 right-8 z-10 text-red-700"
-          >
-            SALE%
-          </Typography>
+    <div>
+      <Card className="w-96 relative">
+        <Typography
+          variant="h4"
+          className="mb-2 absolute -rotate-45 top-12 right-8 z-10 text-red-700"
+        >
+          SALE%
+        </Typography>
+        <Link to={`/products/` + id}>
           <CardHeader floated={false} className="h-96">
             <img src={image} alt={name} />
           </CardHeader>
+
           <CardBody className="text-center">
             <Typography variant="h4" color="blue-gray" className="mb-2">
               {name}
@@ -89,38 +87,38 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
             <Typography color="gray" className="font-medium" textGradient>
               {description}
             </Typography>
-            <Typography color="gray" className="font-medium" textGradient>
+            <Typography variant="h4" color="red" className="mb-2">
               {price}
             </Typography>
           </CardBody>
-          
-          <CardFooter className="flex justify-center gap-7 pt-2">
-            <Tooltip content="Add to Cart" placement="bottom">
-              <Button
-                onClick={addToCartHandler}
-                size="lg"
-                color="gray"
-                variant="outlined"
-                ripple={true}
-              >
-                Add to Cart
-              </Button>
-            </Tooltip>
-            <Tooltip content="Add to Wishlist" placement="bottom">
-              <Button
-                onClick={() => addToWishlist(id)}
-                size="lg"
-                color="gray"
-                variant="outlined"
-                ripple={true}
-              >
-                Add to Wishlist
-              </Button>
-            </Tooltip>
-          </CardFooter>
-        </Card>
-      </div>
-    </Link>
+        </Link>
+
+        <CardFooter className="flex justify-center gap-7 pt-2">
+          <Tooltip content="Add to Cart" placement="bottom">
+            <Button
+              onClick={addToCartHandler}
+              size="lg"
+              color="gray"
+              variant="outlined"
+              ripple={true}
+            >
+              Add to Cart
+            </Button>
+          </Tooltip>
+          <Tooltip content="Add to Wishlist" placement="bottom">
+            <Button
+              onClick={() => addToWishlist(id)}
+              size="lg"
+              color="gray"
+              // variant="outlined"
+              ripple={true}
+            >
+              Add to Wishlist
+            </Button>
+          </Tooltip>
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 
