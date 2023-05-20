@@ -21,7 +21,7 @@ function WishList() {
         dispatch(setWishlist(response.data[0].fav_items));
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
 
   const removeItem = (item) => {
     interceptorInstance

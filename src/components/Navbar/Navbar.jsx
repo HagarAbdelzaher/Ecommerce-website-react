@@ -53,12 +53,12 @@ const Navbar = () => {
               />
             </svg>
              )}
-            <Link to='wishlist'  className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2">
-              Whish List
+            <Link to={'/wishlist'}  className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2">
+              Wish List
             </Link>
           </div>
           <div
-            className="flex flex-row items-center cursor-pointer"
+            className="flex flex-row items-center cursor-pointer px-2"
             onClick={handleOpen}
           >
             {totalAmount > 0 ? (
@@ -87,24 +87,24 @@ const Navbar = () => {
          
           </div>
 
-          <div
-            className="flex flex-row items-center cursor-pointer"
-            onClick={handleOpen}
-          >           
-            <Link to="/order" className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
-             My Orders
-            </Link>
-         
-          </div>
-
           <div className="flex flex-row items-center cursor-pointer">
                  <Link to={"/profile" }>
-               <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
+               <p className=" font-inter text-base font-medium tracking-normal leading-none text-center px-2">
              Update
             </p>
             </Link>
             
           </div>
+
+          <div
+            className="flex flex-row items-center cursor-pointer px-2"
+            onClick={handleOpen}
+          >
+            <Link to={'/orders'}  className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2">
+              My Orders
+            </Link>
+          </div>
+
           <div className="flex flex-row items-center cursor-pointer pl-4">
            
             <div onClick={() => dispatch(logout())}>
