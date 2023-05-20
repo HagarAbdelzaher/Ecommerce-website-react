@@ -110,7 +110,6 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
               onClick={() => addToWishlist(id)}
               size="lg"
               color="gray"
-              // variant="outlined"
               ripple={true}
             >
               Add to Wishlist
