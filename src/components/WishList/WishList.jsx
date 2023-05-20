@@ -3,16 +3,18 @@ import "./wishlist.css";
 import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
 import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setWishlist } from "../../features/slices/wishlistSlice";
 import { setCart, editquantity } from "../../features/slices/cartSlice";
 import Navbar from "../Navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
 
 function WishList() {
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+ 
   useEffect(() => {
     interceptorInstance
       .get("users/wishlist")
@@ -45,26 +47,30 @@ function WishList() {
       interceptorInstance
         .post(`users/cart/items/${item.product.id}/add`, { quantity: 1 })
         .then((response) => dispatch(setCart([...cart, response.data])))
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.error(error);
+          if (error.response && error.response.status >= 400) {
+            toast.error(error.response.data.error[0] || "Wrong Credintials", {
+              position: "top-center",
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
     } else {
-      interceptorInstance
-        .patch(`users/cart/items/${item.product.id}/add`, { quantity: 1 })
-        .then((response) => {
-          console.log(response.data.quantity);
-          dispatch(
-            editquantity({
-              newQuantity: response.data.quantity,
-              selected_item: item,
-            })
-          );
-        })
-        .catch((error) => console.log(error));
+      navigate("/cart");
     }
   };
 
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="container mx-auto mt-10">
         <div className="md:shadow-md justify-center px-2 ">
           <div className="flex justify-between border-b pb-8 px-5">
@@ -97,18 +103,31 @@ function WishList() {
                           </div>
                         </td>
                         <td>
-                          <div className="flex flex-col justify-between ml-4  w-1/2 ">
-                            <Button
-                              className=" shadow-sm bg-blue-600 text-white"
-                              onClick={() => addToCartHandler(item)}
-                            >
-                              Add to Cart &nbsp; &nbsp;
-                              <i className="fa-solid fa-cart-plus text-white"></i>
-                            </Button>
+                          <div className="flex flex-col justify-between ml-4  ">
+                            {cart.find(
+                              (selected_item) =>
+                                selected_item.product.id === item.product.id
+                            ) ? (
+                              <Button
+                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 w-2/3"
+                                onClick={() => navigate('/cart')}
+                              >
+                                see purchase options &nbsp; &nbsp;
+                                <i className="fa-solid fa-cart-plus text-white mx-2 my-2 md:my-1"></i>
+                              </Button>
+                            ) : (
+                              <Button
+                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1"
+                                onClick={() => addToCartHandler(item)}
+                              >
+                                Add to Cart &nbsp; &nbsp;
+                                <i className="fa-solid fa-cart-plus text-white"></i>
+                              </Button>
+                            )}
                           </div>
                         </td>
                         <td>
-                          <div className="flex flex-col justify-between ml-4  w-1/2">
+                          <div className="flex flex-col justify-between ml-4 ">
                             <Button
                               className=" bg-red-500  text-white"
                               onClick={() => removeItem(item)}
@@ -123,7 +142,7 @@ function WishList() {
                   </tbody>
                 </table>
               </div>
-              <div className="grid grid-cols-1 gap-4  lg:hidden">
+              <div className="grid grid-cols-1 gap-4  lg:hidden mx-auto">
                 {wishlist.map((item) => (
                   <div
                     className="bg-white shadow-md rounded-lg  hover:bg-gray-200 border-gray-400 my-2"
@@ -138,16 +157,30 @@ function WishList() {
                       <div className="flex flex-col items-center space-y-5 mx-auto ">
                         <span className="font-bold">{item.product.name}</span>
                         <span className="text-red-500 ">Zara</span>
-                        <div className="flex flex-row">
+                        <div className="flex flex-col md:flex-row">
+                        {cart.find(
+                              (selected_item) =>
+                                selected_item.product.id === item.product.id
+                            ) ? (
+                              <Button
+                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                                onClick={() => navigate('/cart')}
+                              >
+                                see purchase options &nbsp; &nbsp;
+                                <i className="fa-solid fa-cart-plus text-white"></i>
+                              </Button>
+                            ) : (
+                              <Button
+                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                                onClick={() => addToCartHandler(item)}
+                              >
+                                Add to Cart &nbsp; &nbsp;
+                                <i className="fa-solid fa-cart-plus text-white"></i>
+                              </Button>
+                            )}
+
                           <Button
-                            className="text-m shadow-sm bg-blue-600 text-white mr-10"
-                            onClick={() => addToCartHandler(item)}
-                          >
-                            Add to Cart &nbsp; &nbsp;
-                            <i className="fa-solid fa-cart-plus text-white"></i>
-                          </Button>
-                          <Button
-                            className="text-m bg-red-500  text-white space-x-2"
+                            className="text-m bg-red-500  text-white lg:space-x-2 my-2 md:my-1"
                             onClick={() => removeItem(item)}
                           >
                             Remove &nbsp; &nbsp;
