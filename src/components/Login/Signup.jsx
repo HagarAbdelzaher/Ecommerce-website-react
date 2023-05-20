@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +30,7 @@ const Signup = () => {
       district: "",
     },
   };
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
 
   const onChange = (e) => {
@@ -52,8 +54,7 @@ const Signup = () => {
         "http://127.0.0.1:8000/account/register/",
         values
       );
-      console.log(response.data);
-      // handle success response
+      navigate("/login");
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status >= 400) {
