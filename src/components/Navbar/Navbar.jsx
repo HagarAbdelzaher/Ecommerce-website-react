@@ -91,11 +91,8 @@ const Navbar = () => {
               </svg>
             )}
 
-            <Link
-              to="/cart"
-              className=" p-2 font-inter text-base font-medium tracking-normal leading-none text-center "
-            >
-              Cart
+            <Link to="/cart"  className=" font-inter text-base font-medium tracking-normal leading-none text-center  px-2">
+             Cart
             </Link>
           </div>
      

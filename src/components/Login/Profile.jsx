@@ -54,7 +54,7 @@ const Profile = () => {
         <form onSubmit={handleProfileSubmit}>
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
-              <div className="col-span-full mb-5">
+              <div className="col-span-full mb-1 border-b border-gray-900/10 ">
                 <div className=" flex items-center gap-x-3  ">
                   <UserCircleIcon
                     className="h-12 w-12 text-gray-300"
