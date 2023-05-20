@@ -77,6 +77,9 @@ const SingleProduct = () => {
           <p className="text-gray-600 text-xl font-inter font-bold tracking-normal leading-none pb-4">
             {product.description}
           </p>
+          <p className="text-gray-600 text-xl font-inter font-bold tracking-normal leading-none pb-4">
+            {product.price}
+          </p>
 
           <Tooltip content="Add to Cart" placement="bottom">
             <Button
