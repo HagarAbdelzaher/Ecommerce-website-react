@@ -103,7 +103,7 @@ const Navbar = () => {
             <div onClick={() => dispatch(logout())}>
               <Tooltip content="Sign Out" placement="bottom">
                 <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
-                  {user.user.username}
+                  {user.username}
                 </p>
               </Tooltip>
             </div>
