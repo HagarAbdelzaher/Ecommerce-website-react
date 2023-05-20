@@ -10,6 +10,7 @@ const Navbar = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const totalwishlist = useSelector((state) => state.wishlist.totalAmount);
   const user = useSelector((state) => state.user.user);
+  
   const { name } = user;
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

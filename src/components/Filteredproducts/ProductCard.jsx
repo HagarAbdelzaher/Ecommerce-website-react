@@ -9,18 +9,27 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../../features/slices/productsSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
+import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
 import { Button } from "@material-tailwind/react";
 import { setCart, editquantity } from "../../features/slices/cartSlice";
 import { setWishlist } from "../../features/slices/wishlistSlice";
+const navigate = useNavigate();
 
 const ProductCard = ({ id, name, description, image, price, quantity }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.wishlist);
+  const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.cart.cart);
 
   const addToCartHandler = () => {
+    if (!user.username) {
+      navigate("/login");
+      return;
+      }
     const existed = cart.findIndex((cartItem) => cartItem.product.id === id);
     if (existed === -1) {
       interceptorInstance
@@ -44,6 +53,10 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
   };
 
   const addToWishlist = () => {
+    if (!user.username) {
+      navigate("/login");
+      return;
+      }
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       interceptorInstance
@@ -79,6 +92,7 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
               {price}
             </Typography>
           </CardBody>
+          
           <CardFooter className="flex justify-center gap-7 pt-2">
             <Tooltip content="Add to Cart" placement="bottom">
               <Button
