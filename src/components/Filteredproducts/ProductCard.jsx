@@ -17,13 +17,14 @@ import interceptorInstance from "../../axios";
 import { Button } from "@material-tailwind/react";
 import { setCart, editquantity } from "../../features/slices/cartSlice";
 import { setWishlist } from "../../features/slices/wishlistSlice";
-const navigate = useNavigate();
+
 
 const ProductCard = ({ id, name, description, image, price, quantity }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.cart.cart);
+  const navigate = useNavigate();
 
   const addToCartHandler = () => {
     if (!user.username) {

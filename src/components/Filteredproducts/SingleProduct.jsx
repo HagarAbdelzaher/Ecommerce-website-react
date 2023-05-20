@@ -24,6 +24,10 @@ const SingleProduct = () => {
   }
 
   const addToCart = (productId) => {
+    if (!user.username) {
+      navigate("/login");
+      return;
+      }
     const existed = cart.findIndex((cartItem) => cartItem.product.id === productId);
     if (existed === -1) {
       interceptorInstance
@@ -46,6 +50,10 @@ const SingleProduct = () => {
   };
 
   const addToWishlist = (productId) => {
+    if (!user.username) {
+      navigate("/login");
+      return;
+      }
     const existed = wishlist.findIndex((item) => item.product.id === productId);
     if (existed === -1) {
       interceptorInstance
