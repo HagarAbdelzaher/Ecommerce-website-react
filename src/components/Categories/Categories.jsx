@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-tailwind/react";
 import clothes from "../../assets/images/clothes.jpg";
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 

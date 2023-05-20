@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleProduct } from "../../features/slices/productsSlice";
+// import { fetchSingleProduct } from "../../features/slices/productsSlice";
 import { Link } from "react-router-dom";
 import interceptorInstance from "../../axios";
 import { Button } from "@material-tailwind/react";

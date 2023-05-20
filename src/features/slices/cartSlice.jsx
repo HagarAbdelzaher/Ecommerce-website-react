@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import interceptorInstance from "../../axios";
+// import interceptorInstance from "../../axios";
 
 export const cartSlice = createSlice({
   name: "cart",

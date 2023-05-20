@@ -10,7 +10,7 @@ const Navbar = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const totalwishlist = useSelector((state) => state.wishlist.totalAmount);
   const user = useSelector((state) => state.user.user);
-  const { name } = user;
+  // const { name } = user;
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -86,6 +86,17 @@ const Navbar = () => {
             </Link>
          
           </div>
+
+          <div
+            className="flex flex-row items-center cursor-pointer"
+            onClick={handleOpen}
+          >           
+            <Link to="/order" className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
+             My Orders
+            </Link>
+         
+          </div>
+
           <div className="flex flex-row items-center cursor-pointer">
                  <Link to={"/profile" }>
                <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">

@@ -25,7 +25,7 @@ function Cart() {
         dispatch(setCart(response.data[0].cart));
       })
       .catch((error) => console.log(error));
-  }, []);
+  });
 
   const updateQuantity = (quantity, item, action) => {
     const existed = cart.findIndex((cartItem) => item.id === cartItem.id);
@@ -303,9 +303,11 @@ function Cart() {
                 <span>Total cost</span>
                 <span>{totalPrice + 10}$</span>
               </div>
+              <Link to={"/order"}>
               <Button className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full">
                 Checkout
               </Button>
+              </Link>
             </div>
           </div>
         </div>
