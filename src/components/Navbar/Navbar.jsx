@@ -97,32 +97,37 @@ const Navbar = () => {
               Cart
             </Link>
           </div>
-          {user.username ? (
-          <div className="flex flex-row items-center cursor-pointer">
-            <Link to={"/profile"}>
-              <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
-               Profile
-              </p>
-            </Link>
-          </div>
-          ) : (
-  <></>
-)}
-          {user.username ? (
-          <div className="flex flex-row items-center cursor-pointer pl-4">
-            <div onClick={() => dispatch(logout())}>
-              <Tooltip content="Sign Out" placement="bottom">
-                <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
-                 Logout
+     
+         {!user.username ? (
+            <div className="flex flex-row items-center cursor-pointer">
+              <Link to={"/login"}>
+                <p className="font-inter text-base font-medium tracking-normal leading-none text-center ">
+                  Login
                 </p>
-              </Tooltip>
-            </div>
+              </Link>
             </div>
           ) : (
-            <></>
-          )}
-         
-        
+            <>            
+            <div className="flex flex-row items-center cursor-pointer">
+              <Link to={"/profile"}>
+                <p className="font-inter text-base font-medium tracking-normal leading-none text-center ">
+                  Profile
+                </p>
+              </Link>
+            </div>
+            <div className="flex flex-row items-center cursor-pointer pl-4">
+              <div onClick={() => dispatch(logout())}>
+                <Tooltip content="Sign Out" placement="bottom">
+                  <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
+                    Logout
+                  </p>
+                </Tooltip>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
      
       
       <div className="bg-black p-4 w-full flex items-center justify-center mx-auto">
