@@ -26,7 +26,12 @@ const Navbar = () => {
       </div>
       <div className="flex justify-around items-center">
         <div>
-          <img className="h-28 w-full" src={logo} alt="store"></img>
+        <Link
+              to="/"
+              className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
+            >
+          <img lassName="h-28 w-full" src={logo} alt="store"></img>
+         </Link>
         </div>
         <div className="flex flex-row items-center">
           <div
@@ -54,7 +59,7 @@ const Navbar = () => {
               </svg>
             )}
             <Link
-              to="wishlist"
+              to="/wishlist"
               className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
             >
               Wish List
@@ -92,7 +97,7 @@ const Navbar = () => {
               Cart
             </Link>
           </div>
-            {user ? (
+          {user.username ? (
           <div className="flex flex-row items-center cursor-pointer">
             <Link to={"/profile"}>
               <p className=" font-inter text-base font-medium tracking-normal leading-none text-center ">
@@ -103,7 +108,7 @@ const Navbar = () => {
           ) : (
   <></>
 )}
-          {user ? (
+          {user.username ? (
           <div className="flex flex-row items-center cursor-pointer pl-4">
             <div onClick={() => dispatch(logout())}>
               <Tooltip content="Sign Out" placement="bottom">

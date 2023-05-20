@@ -75,6 +75,9 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
             <Typography color="gray" className="font-medium" textGradient>
               {description}
             </Typography>
+            <Typography color="gray" className="font-medium" textGradient>
+              {price}
+            </Typography>
           </CardBody>
           <CardFooter className="flex justify-center gap-7 pt-2">
             <Tooltip content="Add to Cart" placement="bottom">

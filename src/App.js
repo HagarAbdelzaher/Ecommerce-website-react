@@ -21,10 +21,10 @@ function App() {
           <Routes>
             <Route path="/signup" element={<Signup></Signup>}></Route>
             <Route path="/" element={<Main></Main> }></Route>
-            <Route
+            {/* <Route
               path="/login"
               element={authUser ? <Main></Main> : <Login></Login>}
-            ></Route>
+            ></Route> */}
             <Route
               path="/categories/:id"
               element={<SingleCategory></SingleCategory>}
