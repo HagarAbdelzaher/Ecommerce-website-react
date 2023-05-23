@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo2.jpg";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/slices/authSlice";
@@ -10,7 +10,7 @@ const Navbar = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const totalwishlist = useSelector((state) => state.wishlist.totalAmount);
   const user = useSelector((state) => state.user.user);
-  
+
   const { name } = user;
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -20,23 +20,23 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-black p-4 w-full flex justify-center items-center ">
+      <div className="bg-red-700 p-4 w-full flex justify-center items-center rounded-md ">
         <p className="text-white font-inter text-2xl font-bold  ">
           Welcome to our store
         </p>
       </div>
-      <div className="flex justify-around items-center">
+      <div className="flex justify-around items-center bg-gray">
         <div>
-        <Link
-              to="/"
-              className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
-            >
-          <img lassName="h-28 w-full" src={logo} alt="store"></img>
-         </Link>
+          <Link
+            to="/"
+            className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
+          >
+            <img className="h-20 w-full" src={logo} alt="store"></img>
+          </Link>
         </div>
         <div className="flex flex-row items-center">
           <div
-            className="flex flex-row items-center cursor-pointer"
+            className="flex flex-row items-center cursor-pointer p-5 hover:bg-black duration-300 ease-in-out hover:text-white rounded-md"
             onClick={handleOpen}
           >
             {totalwishlist > 0 ? (
@@ -46,11 +46,11 @@ const Navbar = () => {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="black"
                 viewBox="0 0 24 24"
                 strokeWidth="2"
-                stroke="#000"
-                className="w-6 h-6"
+                stroke="white"
+                className="w-6 h-6 "
               >
                 <path
                   strokeLinecap="round"
@@ -61,13 +61,13 @@ const Navbar = () => {
             )}
             <Link
               to="/wishlist"
-              className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
+              className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2 "
             >
               Wish List
             </Link>
           </div>
           <div
-            className="flex flex-row items-center cursor-pointer px-2"
+            className="flex flex-row items-center cursor-pointer px-2  p-5 hover:bg-black duration-300 ease-in-out hover:text-white rounded-md"
             onClick={handleOpen}
           >
             {totalAmount > 0 ? (
@@ -77,10 +77,10 @@ const Navbar = () => {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="white"
                 viewBox="0 0 24 24"
                 strokeWidth="2"
-                stroke="#000"
+                stroke="black"
                 className="w-6 h-6"
               >
                 <path
@@ -91,21 +91,27 @@ const Navbar = () => {
               </svg>
             )}
 
-            <Link to="/cart"  className=" font-inter text-base font-medium tracking-normal leading-none text-center  px-2">
-             Cart
+            <Link
+              to="/cart"
+              className=" font-inter text-base font-medium tracking-normal leading-none text-center  px-2"
+            >
+              Cart
             </Link>
           </div>
 
           <div
-            className="flex flex-row items-center cursor-pointer px-2"
+            className="flex flex-row items-center cursor-pointer px-2 p-5 hover:bg-black duration-300 ease-in-out hover:text-white rounded-md"
             onClick={handleOpen}
           >
-            <Link to={'/orders'}  className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2">
+            <Link
+              to={"/orders"}
+              className=" font-inter text-base font-medium tracking-normal leading-none text-center mr-2"
+            >
               My Orders
             </Link>
           </div>
-     
-         {!user.username ? (
+
+          {!user.username ? (
             <div className="flex flex-row items-center cursor-pointer">
               <Link to={"/login"}>
                 <p className="font-inter text-base font-medium tracking-normal leading-none text-center ">
@@ -114,36 +120,37 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <>            
-            <div className="flex flex-row items-center cursor-pointer">
-              <Link to={"/profile"}>
-                <p className="font-inter text-base font-medium tracking-normal leading-none text-center ">
-                  Profile
-                </p>
-              </Link>
-            </div>
-            <div className="flex flex-row items-center cursor-pointer pl-4">
-              <div onClick={() => dispatch(logout())}>
-                <Tooltip content="Sign Out" placement="bottom">
-                  <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
-                    Logout
+            <>
+              <div className="flex flex-row items-center cursor-pointer p-5 hover:bg-black duration-300 ease-in-out hover:text-white rounded-md">
+                <Link to={"/profile"}>
+                  <p className="font-inter text-base font-medium tracking-normal leading-none text-center ">
+                    Profile
                   </p>
-                </Tooltip>
+                </Link>
               </div>
-            </div>
-          </>
-        )}
+              <div className="flex flex-row items-center cursor-pointer pl-4 p-5 hover:bg-black duration-300 ease-in-out hover:text-white rounded-md">
+                <div onClick={() => dispatch(logout())}>
+                  <Tooltip content="Sign Out" placement="bottom">
+                    <p className="font-inter text-sm font-meduim tracking-normal leading-none text-center">
+                      Logout
+                    </p>
+                  </Tooltip>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-     
-      
-      <div className="bg-black p-4 w-full flex items-center justify-center mx-auto">
-        <p className="text-white font-inter text-base font-medium ">50& OFF</p>
+
+      <div className="bg-red-900 rounded-md p-4 w-full flex items-center justify-center mx-auto">
+        <p className="text-white font-inter text-base font-medium ">
+          Up to 50% OFF
+        </p>
         <p className="text-white font-inter text-base font-medium mx-96">
           Free shipping and returns
         </p>
         <p className="text-white font-inter text-base font-medium ">
-          Diffrent payment methods
+          Find all what you need
         </p>
       </div>
     </>

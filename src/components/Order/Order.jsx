@@ -32,7 +32,7 @@ function Order() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto mt-10 p-4">
+      <div className="container mx-auto mt-10 p-4 bg-gray-100">
         <div className="md:shadow-md justify-center px-2">
           <div className="flex justify-between border-b pb-8 px-5">
             <h1 className="font-semibold text-2xl">My Orders</h1>
@@ -44,7 +44,10 @@ function Order() {
           {orders.length ? (
             <>
               {orders.map((order, index) => (
-                <div key={order.id} className="md:shadow-md justify-center px-4 py-5 my-5">
+                <div
+                  key={order.id}
+                  className="md:shadow-md justify-center px-4 py-5 my-5"
+                >
                   <div className="text-blue-500 text-lg pt-4 pb-6 text-center m-auto">
                     <strong>
                       <h1>Order {index + 1}</h1>

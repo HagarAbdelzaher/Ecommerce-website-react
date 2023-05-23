@@ -8,13 +8,14 @@ import { setWishlist } from "../../features/slices/wishlistSlice";
 import { setCart, editquantity } from "../../features/slices/cartSlice";
 import Navbar from "../Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../Footer/Footer";
 
 function WishList() {
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     interceptorInstance
       .get("users/wishlist")
@@ -110,7 +111,7 @@ function WishList() {
                             ) ? (
                               <Button
                                 className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 w-2/3"
-                                onClick={() => navigate('/cart')}
+                                onClick={() => navigate("/cart")}
                               >
                                 see purchase options &nbsp; &nbsp;
                                 <i className="fa-solid fa-cart-plus text-white mx-2 my-2 md:my-1"></i>
@@ -158,26 +159,26 @@ function WishList() {
                         <span className="font-bold">{item.product.name}</span>
                         <span className="text-red-500 ">Zara</span>
                         <div className="flex flex-col md:flex-row">
-                        {cart.find(
-                              (selected_item) =>
-                                selected_item.product.id === item.product.id
-                            ) ? (
-                              <Button
-                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
-                                onClick={() => navigate('/cart')}
-                              >
-                                see purchase options &nbsp; &nbsp;
-                                <i className="fa-solid fa-cart-plus text-white"></i>
-                              </Button>
-                            ) : (
-                              <Button
-                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
-                                onClick={() => addToCartHandler(item)}
-                              >
-                                Add to Cart &nbsp; &nbsp;
-                                <i className="fa-solid fa-cart-plus text-white"></i>
-                              </Button>
-                            )}
+                          {cart.find(
+                            (selected_item) =>
+                              selected_item.product.id === item.product.id
+                          ) ? (
+                            <Button
+                              className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                              onClick={() => navigate("/cart")}
+                            >
+                              see purchase options &nbsp; &nbsp;
+                              <i className="fa-solid fa-cart-plus text-white"></i>
+                            </Button>
+                          ) : (
+                            <Button
+                              className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                              onClick={() => addToCartHandler(item)}
+                            >
+                              Add to Cart &nbsp; &nbsp;
+                              <i className="fa-solid fa-cart-plus text-white"></i>
+                            </Button>
+                          )}
 
                           <Button
                             className="text-m bg-red-500  text-white lg:space-x-2 my-2 md:my-1"
@@ -209,6 +210,7 @@ function WishList() {
           </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

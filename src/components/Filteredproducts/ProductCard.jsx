@@ -76,11 +76,11 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
           SALE%
         </Typography>
         <Link to={`/products/` + id}>
-          <CardHeader floated={false} className="h-96">
+          <CardHeader floated={false} className="h-96 ">
             <img src={image} alt={name} />
           </CardHeader>
 
-          <CardBody className="text-center">
+          <CardBody className="text-center ">
             <Typography variant="h4" color="blue-gray" className="mb-2">
               {name}
             </Typography>
@@ -109,8 +109,8 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
             <Button
               onClick={() => addToWishlist(id)}
               size="lg"
-              color="gray"
               ripple={true}
+              className="bg-red-900"
             >
               Add to Wishlist
             </Button>

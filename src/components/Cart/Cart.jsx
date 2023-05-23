@@ -13,6 +13,7 @@ import {
   editquantity,
 } from "../../features/slices/cartSlice";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -113,20 +114,16 @@ function Cart() {
     <>
       <Navbar />
       <ToastContainer />
-      <div className="mt-20 ">
+      <div className="mt-20 bg-gray-100 rounded-lg">
         <div className=" flex mt-20 w-full">
           <div className="shadow-md px-2 w-9/12">
             <div className="flex justify-between border-b pb-8 px-5">
               <h1 className="font-semibold text-2xl">Cart</h1>
-              {/* <h2 className="font-semibold text-2xl uppercase"> */}
-              {/* {totalAmount} &nbsp; &nbsp; */}
-              {/* {totalAmount > 1 ? " Items" : " Item"} */}
-              {/* </h2> */}
             </div>
             {totalAmount ? (
               <>
-                <div className=" xs:hidden lg:flex">
-                  <table className="w-full">
+                <div className=" xs:hidden lg:flex rounded-lg">
+                  <table className="w-full rounded">
                     <thead>
                       <th className="pt-4 text-center col-span-5">Product</th>
                       <th className="pt-4 text-center col-span-3">Quantity</th>
@@ -275,7 +272,7 @@ function Cart() {
                       </div>
                     </div>
                   ))}
-                  <div id="summary" className=" pl-10 bg-blue-300 text-white">
+                  <div id="summary" className=" pl-10 bg-blue-300 text-white ">
                     <h1 className="font-semibold text-2xl border-b pb-8">
                       Order Summary
                     </h1>
@@ -315,9 +312,9 @@ function Cart() {
           </div>
           <div
             id="summary"
-            className=" bg-gray-300  hidden lg:block px-5 py-5 "
+            className=" bg-gray-300  hidden lg:block px-5 py-5 rounded-lg"
           >
-            <h1 className="font-semibold text-2xl border-b pb-8">
+            <h1 className="font-semibold text-2xl border-b pb-8 text-red-900 text-center">
               Order Summary
             </h1>
             <div className="flex justify-between mt-10 mb-5">
@@ -340,9 +337,9 @@ function Cart() {
                 <span>{totalPrice + 10}$</span>
               </div>
               <Link to={"/checkout"}>
-              <Button className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full">
-                Checkout
-              </Button>
+                <Button className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full">
+                  Checkout
+                </Button>
               </Link>
             </div>
           </div>
@@ -358,6 +355,7 @@ function Cart() {
           </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAddress, updateProfile } from "../../features/slices/authSlice";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -46,12 +47,11 @@ const Profile = () => {
     dispatch(updateAddress(updatedAddress));
   };
 
-  console.log(user);
   return (
     <>
       <Navbar />
-      <div className="grid grid-cols-2 items-center justify-items-center mt-5  bg-white">
-        <form onSubmit={handleProfileSubmit}>
+      <div className="grid grid-cols-2 items-center justify-items-center mt-5">
+        <form onSubmit={handleProfileSubmit} className="bg-gray p-10">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <div className="col-span-full mb-1 border-b border-gray-900/10 ">
@@ -456,6 +456,7 @@ const Profile = () => {
           </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

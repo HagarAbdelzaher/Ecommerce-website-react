@@ -16,9 +16,9 @@ const ProductSection = () => {
 
   return (
     <div>
-      <div className="bg-black p-2 w-[50%] mx-auto rounded-md">
-        <h2 className="text-red-600 text-center text-lg font-inter font-bold tracking-normal leading-none">
-          SUMMER T-Shirt SALE 30%
+      <div className="bg-red-300 p-2 w-[50%] mx-auto rounded-md">
+        <h2 className="text-white text-center text-lg font-inter font-bold tracking-normal leading-none">
+          Trending Products
         </h2>
       </div>
       <div className="grid grid-cols-3 justify-items-center py-8 gap-4 mx-auto max-w-7xl">
