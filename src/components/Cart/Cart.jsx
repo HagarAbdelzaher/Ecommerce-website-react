@@ -46,7 +46,7 @@ function Cart() {
               setDisableAdding(true);
             }
             toast.error(error.response.data[0] || "Wrong Credintials", {
-              position: 'top-center',
+              position: "top-center",
             });
           } else if (error.request) {
             // The request was made but no response was received
@@ -98,13 +98,11 @@ function Cart() {
         if (error.response && error.response.status >= 400) {
           console.log(error.response.data);
           toast.error(error.response.data.error[0] || "Wrong Credintials", {
-            position: 'top-center',
+            position: "top-center",
           });
         } else if (error.request) {
-          // The request was made but no response was received
           console.log(error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.log("Error", error.message);
         }
         console.log(error.config);
@@ -115,15 +113,15 @@ function Cart() {
     <>
       <Navbar />
       <ToastContainer />
-      <div className="container mx-10 mt-20">
-        <div className="flex mt-20">
-          <div className="shadow-md px-2 w-full">
+      <div className="mt-20 ">
+        <div className=" flex mt-20 w-full">
+          <div className="shadow-md px-2 w-9/12">
             <div className="flex justify-between border-b pb-8 px-5">
               <h1 className="font-semibold text-2xl">Cart</h1>
-              <h2 className="font-semibold text-2xl uppercase">
-                {totalAmount}
-                {totalAmount > 1 ? " Items" : " Item"}
-              </h2>
+              {/* <h2 className="font-semibold text-2xl uppercase"> */}
+              {/* {totalAmount} &nbsp; &nbsp; */}
+              {/* {totalAmount > 1 ? " Items" : " Item"} */}
+              {/* </h2> */}
             </div>
             {totalAmount ? (
               <>
@@ -163,20 +161,23 @@ function Cart() {
                             </div>
                           </td>
                           <td className="col-span-3">
-                            <div className="flex justify-between ml-4 "> 
+                            <div className="flex justify-between w-4/12 ">
                               <i
                                 className={
                                   disableAdding || item.quantity >= 15
                                     ? "fa-solid fa-plus text-gray-500 text-lg pt-1 px-2"
                                     : "fa-solid fa-plus text-light-green-500 text-lg pt-1 px-2 cursor-pointer"
                                 }
-                                onClick={() =>{ if(item.quantity >= 15) return ; updateQuantity(1, item, "add")}}
+                                onClick={() => {
+                                  if (item.quantity >= 15) return;
+                                  updateQuantity(1, item, "add");
+                                }}
                               ></i>
                               <Select
-                                className="bg-gray-50 border border-gray-300 text-gray-900 
-                            text-md rounded-lg focus:ring-blue-500 focus:border-blue-500
-                             block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-                              dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+                                className="bg-gray-50  text-gray-900 
+                            text-md rounded-lg
+                               p-2.5 dark:bg-gray-700 
+                              dark:placeholder-gray-400 dark:text-white 
                                dark:focus:border-blue-500"
                                 value={item.quantity}
                                 onChange={(e) =>
@@ -187,7 +188,7 @@ function Cart() {
                                   <Option
                                     value={quantity}
                                     key={`${item.id}+${item.product.id}+${quantity}`}
-                                    selected={ quantity === item.quantity }
+                                    selected={quantity === item.quantity}
                                   >
                                     {quantity}
                                   </Option>
@@ -200,7 +201,16 @@ function Cart() {
                                 }
                               ></i>
                             </div>
-                          <p className={disableAdding || item.quantity >= 15 ? 'block text-s text-deep-orange-900' : 'hidden'}> No more than 15 Items </p> 
+                            <p
+                              className={
+                                disableAdding || item.quantity >= 15
+                                  ? "block text-s text-deep-orange-900"
+                                  : "hidden"
+                              }
+                            >
+                              {" "}
+                              No more than 15 Items{" "}
+                            </p>
                           </td>
                           <td className="col-span-2">
                             <span className="text-center w-1/5 font-semibold text-lg">
@@ -285,23 +295,6 @@ function Cart() {
                         <option>Standard shipping - $10.00</option>
                       </select>
                     </div>
-                    <div className="py-10">
-                      <label
-                        htmlFor="promo"
-                        className="font-semibold inline-block mb-3 text-sm uppercase"
-                      >
-                        Promo Code
-                      </label>
-                      <Input
-                        type="text"
-                        id="promo"
-                        placeholder="Enter your code"
-                        className="p-2 text-sm w-full bg-white"
-                      />
-                    </div>
-                    <Button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
-                      Apply
-                    </Button>
                     <div className="border-t mt-8">
                       <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                         <span>Total cost</span>
@@ -320,7 +313,10 @@ function Cart() {
               </div>
             )}
           </div>
-          <div id="summary" className=" pl-10 bg-gray-300  hidden lg:block">
+          <div
+            id="summary"
+            className=" bg-gray-300  hidden lg:block px-5 py-5 "
+          >
             <h1 className="font-semibold text-2xl border-b pb-8">
               Order Summary
             </h1>
@@ -338,23 +334,6 @@ function Cart() {
                 <option>Standard shipping - $10.00</option>
               </select>
             </div>
-            <div className="py-10">
-              <label
-                htmlFor="promo"
-                className="font-semibold inline-block mb-3 text-sm uppercase"
-              >
-                Promo Code
-              </label>
-              <Input
-                type="text"
-                id="promo"
-                placeholder="Enter your code"
-                className="p-2 text-sm w-full bg-white"
-              />
-            </div>
-            <Button className="bg-gray-600 hover:bg-red-900 px-5 py-2 text-sm text-white uppercase">
-              Apply
-            </Button>
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
@@ -368,6 +347,7 @@ function Cart() {
             </div>
           </div>
         </div>
+
         <div>
           <Link
             to="/"
