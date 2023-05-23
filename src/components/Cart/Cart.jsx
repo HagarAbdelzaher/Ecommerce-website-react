@@ -21,6 +21,7 @@ function Cart() {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const [disableAdding, setDisableAdding] = useState(false);
+  const isDisabled = !cart.length;
 
   useEffect(() => {
     interceptorInstance
