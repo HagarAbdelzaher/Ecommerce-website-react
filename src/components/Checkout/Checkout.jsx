@@ -6,7 +6,6 @@ import interceptorInstance from "../../axios";
 import Navbar from "../Navbar/Navbar";
 
 function Order() {
-  // i want to get order from redux
   const order = useSelector((state) => state.orders.order);
   const shipping_address = useSelector(
     (state) => state.orders.shipping_address
@@ -14,7 +13,6 @@ function Order() {
   const order_items = useSelector((state) => state.orders.order_items);
   const total_price = useSelector((state) => state.orders.total_price);
   console.log(order);
-  console.log(order.shipping_address);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,9 +25,9 @@ function Order() {
       .catch((error) => console.log(error));
   }, []);
 
-  const payWithStripe = () => {
+  const payWithStripe = (id) => {
     interceptorInstance
-      .post("orders/payment/")
+      .post(`orders/${id}/payment/`)
       .then((response) => {
         console.log(response.data);
         // redirect to stripe payment page
@@ -47,7 +45,6 @@ function Order() {
           <div className="flex justify-between border-b pb-8 px-5">
             <h1 className="font-semibold text-2xl mt-5">Order Summary</h1>
           </div>
-          {/* <div className="grid grid-cols-1 items-center justify-items-center h-screen bg-white"> */}
           <div className="grid items-center justify-items-center">
             <div className="w-2/5 mt-n20 p-5 shadow">
               <div className="flex flex-col gap-4">
@@ -76,7 +73,7 @@ function Order() {
               {/* Pay button linked with stripe and change the paid attribute */}
               <Button
                 className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full"
-                onClick={() => payWithStripe()}
+                onClick={() => payWithStripe(order.id)}
               >
                 Pay
               </Button>

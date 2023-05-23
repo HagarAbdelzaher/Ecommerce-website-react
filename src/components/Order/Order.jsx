@@ -33,7 +33,7 @@ function Order() {
     <>
       <Navbar />
       <div className="container mx-auto mt-10 p-4 bg-gray-100">
-        <div className="md:shadow-md justify-center px-2">
+        <div className="md:shadow-md justify-center px-2 py-3">
           <div className="flex justify-between border-b pb-8 px-5">
             <h1 className="font-semibold text-2xl">My Orders</h1>
             <h2 className="font-semibold text-2xl uppercase">
@@ -54,11 +54,15 @@ function Order() {
                     </strong>
 
                     <Button
-                      color="red"
+                      // set color based on order status
+                      color={order.status === "canceled" ? "gray" : "red"}
+                      disabled={order.status === "canceled" ? true : false}
                       className="mt-4"
                       onClick={() => cancelOrder(order.id)}
                     >
-                      Cancel Order
+                      {order.status === "canceled"
+                        ? "Canceled"
+                        : "Cancel Order"}
                     </Button>
                   </div>
                   <div className=" xs:hidden lg:flex">
@@ -130,10 +134,31 @@ function Order() {
                             <strong>{order.created_at.split("T")[0]}</strong>
                           </th>
                           <th className="pt-4 text-center col-span-3">
-                            <strong>{order.status}</strong>
+                            <strong>
+                              {/* set status bcolor based on status [pending, shipped, delivered, canceled] */}
+                              <span
+                                className={`${
+                                  order.status === "pending"
+                                    ? "text-yellow-700"
+                                    : order.status === "shipped"
+                                    ? "text-blue-800"
+                                    : order.status === "delivered"
+                                    ? "text-green-600"
+                                    : "text-red-800"
+                                } text-white px-2 py-1 rounded-full`}
+                              >
+                                {order.status}
+                              </span>
+                            </strong>
                           </th>
                           <th className="pt-4 text-center col-span-2">
-                            <strong>{order.paid ? "Paid" : "Not Paid"}</strong>
+                            <strong
+                              className={`${
+                                order.paid ? "text-green-600" : "text-red-800"
+                              }`}
+                            >
+                              {order.paid ? "Paid" : "Not Paid"}
+                            </strong>
                           </th>
                           <th className="pt-4 text-center col-span-2">
                             <strong>${order.total_price}</strong>
