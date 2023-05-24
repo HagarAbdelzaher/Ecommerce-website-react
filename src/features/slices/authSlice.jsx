@@ -71,6 +71,15 @@ export const authSlice = createSlice({
     },
   },
   reducers: {
+    // set user state from sessionStorage
+    setUser(state, action) {
+      let userlogging = JSON.parse(sessionStorage.getItem("authUser"));
+      if (userlogging) {
+        state.user = userlogging.user;
+        state.user.authUser = true;
+        state.user.token = userlogging.token;
+      }
+    },
     login(state, action) {
       const userlogging = action.payload;
       const userValidation = /^[A-Za-z0-9]{4,10}$/i.test(userlogging.username);
@@ -124,5 +133,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setUser } = authSlice.actions;
 export default authSlice.reducer;
