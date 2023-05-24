@@ -21,7 +21,7 @@ const ProductSection = () => {
           Trending Products
         </h2>
       </div>
-      <div className="grid grid-cols-3 justify-items-center py-8 gap-4 mx-auto max-w-7xl">
+      <div className="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center py-8 gap-4 mx-auto max-w-7xl">
         {products.map((product, index) => {
           return (
             <div key={index}>

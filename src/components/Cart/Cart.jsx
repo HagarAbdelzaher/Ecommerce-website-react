@@ -3,7 +3,7 @@ import "./cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
 import { Button, Input, Select, Option } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,6 +23,7 @@ function Cart() {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const [disableAdding, setDisableAdding] = useState(false);
   const isDisabled = !cart.length;
+  const navigate = useNavigate();
 
   useEffect(() => {
     interceptorInstance
@@ -31,7 +32,7 @@ function Cart() {
         dispatch(setCart(response.data[0].cart));
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
 
   const updateQuantity = (quantity, item, action) => {
     const existed = cart.findIndex((cartItem) => item.id === cartItem.id);
@@ -115,9 +116,9 @@ function Cart() {
     <>
       <Navbar />
       <ToastContainer />
-      <div className="mt-20 bg-gray-100 rounded-lg">
+      <div className="mt-20 rounded-lg ">
         <div className=" flex mt-20 w-full">
-          <div className="shadow-md px-2 w-9/12">
+          <div className="shadow-md px-2 w-9/12 ">
             <div className="flex justify-between border-b pb-8 px-5">
               <h1 className="font-semibold text-2xl">Cart</h1>
             </div>
@@ -173,7 +174,7 @@ function Cart() {
                               ></i>
                               <Select
                                 className="bg-gray-50  text-gray-900 
-                            text-md rounded-lg
+                                  text-md rounded-lg
                                p-2.5 dark:bg-gray-700 
                               dark:placeholder-gray-400 dark:text-white 
                                dark:focus:border-blue-500"
@@ -313,7 +314,7 @@ function Cart() {
           </div>
           <div
             id="summary"
-            className=" bg-gray-300  hidden lg:block px-5 py-5 rounded-lg"
+            className=" bg-gray-300  hidden lg:block px-5 py-5 rounded-lg "
           >
             <h1 className="font-semibold text-2xl border-b pb-8 text-red-900 text-center">
               Order Summary
@@ -335,13 +336,15 @@ function Cart() {
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>{totalPrice + 10}$</span>
+                <span>{cart.length ? totalPrice + 10 : totalPrice}$</span>
               </div>
-              <Link to={"/checkout"}>
-                <Button className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full">
-                  Checkout
-                </Button>
-              </Link>
+              <Button
+                className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full"
+                onClick={() => navigate("/checkout")}
+                disabled={cart.length ? false : true}
+              >
+                Checkout
+              </Button>
             </div>
           </div>
         </div>

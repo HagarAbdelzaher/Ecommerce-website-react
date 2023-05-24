@@ -145,7 +145,7 @@ function Order() {
                                     : order.status === "delivered"
                                     ? "text-green-600"
                                     : "text-red-800"
-                                } text-white px-2 py-1 rounded-full`}
+                                } px-2 py-1 rounded-full`}
                               >
                                 {order.status}
                               </span>

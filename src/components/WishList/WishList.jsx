@@ -110,7 +110,7 @@ function WishList() {
                                 selected_item.product.id === item.product.id
                             ) ? (
                               <Button
-                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 w-2/3"
+                                className=" shadow-sm bg-black text-white mx-2 my-2 md:my-1 w-2/3"
                                 onClick={() => navigate("/cart")}
                               >
                                 see purchase options &nbsp; &nbsp;
@@ -118,7 +118,7 @@ function WishList() {
                               </Button>
                             ) : (
                               <Button
-                                className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1"
+                                className=" shadow-sm bg-black text-white mx-2 my-2 md:my-1"
                                 onClick={() => addToCartHandler(item)}
                               >
                                 Add to Cart &nbsp; &nbsp;
@@ -130,7 +130,7 @@ function WishList() {
                         <td>
                           <div className="flex flex-col justify-between ml-4 ">
                             <Button
-                              className=" bg-red-500  text-white"
+                              className=" bg-red-900  text-white"
                               onClick={() => removeItem(item)}
                             >
                               Remove &nbsp; &nbsp;
@@ -164,7 +164,7 @@ function WishList() {
                               selected_item.product.id === item.product.id
                           ) ? (
                             <Button
-                              className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                              className=" shadow-sm bg-black text-white mx-2 my-2 md:my-1 "
                               onClick={() => navigate("/cart")}
                             >
                               see purchase options &nbsp; &nbsp;
@@ -172,7 +172,7 @@ function WishList() {
                             </Button>
                           ) : (
                             <Button
-                              className=" shadow-sm bg-blue-600 text-white mx-2 my-2 md:my-1 "
+                              className=" shadow-sm bg-black text-white mx-2 my-2 md:my-1 "
                               onClick={() => addToCartHandler(item)}
                             >
                               Add to Cart &nbsp; &nbsp;
@@ -181,7 +181,7 @@ function WishList() {
                           )}
 
                           <Button
-                            className="text-m bg-red-500  text-white lg:space-x-2 my-2 md:my-1"
+                            className="text-m bg-red-900  text-white lg:space-x-2 my-2 md:my-1"
                             onClick={() => removeItem(item)}
                           >
                             Remove &nbsp; &nbsp;
