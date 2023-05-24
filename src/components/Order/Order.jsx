@@ -1,22 +1,31 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setOrder, cancelOrderState } from "../../features/slices/orderSlice";
+import { setUser } from "../../features/slices/authSlice";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import interceptorInstance from "../../axios";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 function Order() {
   const orders = useSelector((state) => state.orders.order);
   const dispatch = useDispatch();
 
+  // get all orders of the user
   useEffect(() => {
     interceptorInstance
-      .post("orders/payment/success/")
+      .get("orders/")
       .then((response) => {
+        console.log(response.data);
         dispatch(setOrder(response.data));
       })
       .catch((error) => console.log(error));
+  }, []);
+
+  // set user from local storage
+  useEffect(() => {
+    dispatch(setUser())
   }, []);
 
   const cancelOrder = (id) => {
@@ -112,6 +121,7 @@ function Order() {
                           </tr>
                         ))}
                       </tbody>
+
                       <tfoot className="text-lg py-5 mb-5">
                         <tr>
                           <th className="pt-4 text-center col-span-5">
@@ -121,14 +131,9 @@ function Order() {
                             <strong>Status</strong>
                           </th>
                           <th className="pt-4 text-center col-span-2">
-                            <strong>Payment</strong>
-                          </th>
-                          <th className="pt-4 text-center col-span-2">
                             <strong>Total Price</strong>
                           </th>
                         </tr>
-                      </tfoot>
-                      <tfoot className="text-lg py-5 mb-4">
                         <tr>
                           <th className="pt-4 text-center col-span-5">
                             <strong>{order.created_at.split("T")[0]}</strong>
@@ -149,15 +154,6 @@ function Order() {
                               >
                                 {order.status}
                               </span>
-                            </strong>
-                          </th>
-                          <th className="pt-4 text-center col-span-2">
-                            <strong
-                              className={`${
-                                order.paid ? "text-green-600" : "text-red-800"
-                              }`}
-                            >
-                              {order.paid ? "Paid" : "Not Paid"}
                             </strong>
                           </th>
                           <th className="pt-4 text-center col-span-2">
@@ -186,6 +182,7 @@ function Order() {
           Continue Shopping
         </Link>
       </div>
+      <Footer />
     </>
   );
 }

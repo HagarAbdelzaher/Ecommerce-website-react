@@ -8,7 +8,6 @@ import Profile from "./components/Login/Profile";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
 import Order from "./components/Order/Order";
-import Checkout from "./components/Checkout/Checkout";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./components/Main/Main";
@@ -47,10 +46,6 @@ function App() {
             <Route
               path="/profile"
               element={authUser ? <Profile></Profile> : <Login></Login>}
-            ></Route>
-            <Route
-              path="/checkout"
-              element={authUser ? <Checkout></Checkout> : <Login></Login>}
             ></Route>
             <Route
               path="/orders"

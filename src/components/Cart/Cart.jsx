@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import interceptorInstance from "../../axios";
-import { Button, Input, Select, Option } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Select, Option } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,8 +22,6 @@ function Cart() {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const [disableAdding, setDisableAdding] = useState(false);
-  const isDisabled = !cart.length;
-  const navigate = useNavigate();
 
   useEffect(() => {
     interceptorInstance
@@ -33,6 +31,16 @@ function Cart() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const payWithStripe = () => {
+    interceptorInstance
+      .post(`orders/checkout/`)
+      .then((response) => {
+        // redirect to stripe payment page
+        window.location.href = response.data.url;
+      })
+      .catch((error) => console.log(error));
+  };
 
   const updateQuantity = (quantity, item, action) => {
     const existed = cart.findIndex((cartItem) => item.id === cartItem.id);
@@ -340,7 +348,7 @@ function Cart() {
               </div>
               <Button
                 className="bg-gray-700 font-semibold hover:bg-green-700 py-3 text-sm text-white uppercase w-full"
-                onClick={() => navigate("/checkout")}
+                onClick={() => payWithStripe()}
                 disabled={cart.length ? false : true}
               >
                 Checkout
